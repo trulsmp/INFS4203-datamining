@@ -34,9 +34,7 @@ def merge_data():
             result_data.append(w[i])
     return result_data
 
-def remove_headers(readFilename, writeFilename):
-    fields = ["Result", "ST1.1", "ST2.1", "ST1.2", "ST2.2", "ACE.1", "ACE.2", "TPW.1", "TPW.2", "Gender"]
-
+def remove_fields(readFilename, writeFilename, fields):
     with open(readFilename) as infile, open(writeFilename, "wb") as outfile:
         r = csv.DictReader(infile)
         w = csv.DictWriter(outfile, fields, extrasaction="ignore")
@@ -59,9 +57,14 @@ def remove_empty_fields(data):
 def prepareData():
     result = merge_data()
     write_result("csvFiles/merged.csv", result)
-    remove_headers("csvFiles/merged.csv", "csvFiles/headersRemoved.csv")
+
+    fields = ["Result", "ST1.1", "ST2.1", "ST1.2", "ST2.2", "ACE.1", "ACE.2", "TPW.1", "TPW.2", "Gender"]
+    remove_fields("csvFiles/merged.csv", "csvFiles/headersRemoved.csv", fields)
+
     headers_removed = get_csv_data("csvFiles/headersRemoved.csv")
+
     empty_removed = remove_empty_fields(headers_removed)
+
     write_result("csvFiles/removedEmpty.csv", empty_removed)
 
 
