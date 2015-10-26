@@ -5,6 +5,7 @@ Repo for data mining project in course at UQ (University of Queensland)
 - numpy
 - scipy
 - scikit-learn
+- matplotlib
 
 ## Library installation
 scikit-learn, numpy, scipy using pip for osx:
